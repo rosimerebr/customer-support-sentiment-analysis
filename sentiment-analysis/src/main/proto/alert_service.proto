@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+service AlertService {
+    // Bidirectional Streaming RPC
+    rpc AlertChannel (stream AlertMessage) returns (stream AlertMessage);
+}
+
+message AlertMessage {
+    string alert_type = 1; // E.g., "Critical", "Warning"
+    string message = 2;
+}

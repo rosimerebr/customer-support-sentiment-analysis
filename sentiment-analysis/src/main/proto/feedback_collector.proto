@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service FeedbackCollectorService {
+    // Client Streaming RPC
+    rpc SubmitFeedbacks (stream Feedback) returns (FeedbackSummary);
+}
+
+message Feedback {
+    string text = 1;
+}
+
+message FeedbackSummary {
+    int32 total_feedbacks = 1;
+    double average_sentiment_score = 2; // Average of all sentiment scores
+}

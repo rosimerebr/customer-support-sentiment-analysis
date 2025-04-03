@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service SentimentAnalyzerService {
+    // Unary RPC
+    rpc AnalyzeText (TextRequest) returns (SentimentResponse);
+
+    // Server Streaming RPC
+    rpc StreamLiveSentiment (TextRequest) returns (stream SentimentUpdate);
+}
+
+message TextRequest {
+    string text = 1;
+}
+
+message SentimentResponse {
+    string sentiment = 1; // Positive, Neutral, Negative
+    double score = 2;
+}
+
+message SentimentUpdate {
+    string status = 1; // E.g., "Processing", "Completed"
+    double reliability = 2; // Confidence level of sentiment analysis
+}
